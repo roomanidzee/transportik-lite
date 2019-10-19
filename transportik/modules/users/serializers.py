@@ -11,3 +11,11 @@ class UserSerializer(srlz.ModelSerializer):
         model = models.User
         fields = ('id', 'email', 'password', 'created_date')
         extra_kwargs = {'password': {'write_only': True}}
+
+
+class ProfileSerializer(srlz.ModelSerializer):
+    """Serializer for profile info"""
+
+    class Meta:
+        model = models.Profile
+        fields = '__all__'

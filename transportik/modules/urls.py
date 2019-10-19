@@ -4,7 +4,7 @@ from django.urls import include, path
 
 urlpatterns = [
     path('security/', include('transportik.modules.security.urls')),
-    path('users/', include('transportik.modules.users.urls')),
+    path('accounts/', include('transportik.modules.users.urls')),
     path('transports/', include('transportik.modules.transports.urls')),
     path('trips/', include('transportik.modules.trips.urls'))
 ]
