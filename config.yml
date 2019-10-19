@@ -1,0 +1,12 @@
+domain: ''
+
+secret_key: 'asfdlnan3o49rj94jofewmcdsozixjp90womed,sa[0op'
+
+jdbc:
+  engine: 'django.db.backends.postgresql_psycopg2'
+  name: 'transportik_db'
+  user: 'transportik_user'
+  password: 'transportik_pass'
+  host: 'localhost'
+  port: 5432
+  conn_max_age: 60
