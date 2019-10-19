@@ -8,19 +8,9 @@ from django.urls import include, path
 admin.autodiscover()
 
 urlpatterns = [
-    path('admin/doc/', include(admindocs_urls)),
-    path('admin/', admin.site.urls),
+    path('api/v1/admin/doc/', include(admindocs_urls)),
+    path('api/v1/admin/', admin.site.urls),
     path('api/v1/transportik/', include('transportik.modules.urls')),
 ]
-
-if settings.DEBUG:  # pragma: no cover
-    import debug_toolbar   # noqa: WPS433
-    from django.conf.urls.static import static  # noqa: WPS433
-
-    urlpatterns = (
-        [path('__debug__/', include(debug_toolbar.urls))]  # noqa: DJ05
-        + urlpatterns
-        + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    )
 
 

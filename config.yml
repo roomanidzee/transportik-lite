@@ -10,3 +10,9 @@ jdbc:
   host: 'localhost'
   port: 5432
   conn_max_age: 60
+
+jwt:
+  verify_token: true
+  verify_expiration: true
+  expiration_time: 3000
+  header: 'Bearer'

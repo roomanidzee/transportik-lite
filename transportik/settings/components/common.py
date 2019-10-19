@@ -13,6 +13,11 @@ SECRET_KEY = config['secret_key']
 INSTALLED_APPS: Tuple[str, ...] = (
 
     'transportik.modules',
+    'transportik.modules.users',
+    'transportik.modules.transports',
+    'transportik.modules.trips',
+    'transportik.modules.security',
+
     # Default django apps:
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +46,7 @@ MIDDLEWARE: Tuple[str, ...] = (
 
 ROOT_URLCONF = 'transportik.urls'
 
-WSGI_APPLICATION = 'server.wsgi.application'
+WSGI_APPLICATION = 'transportik.wsgi.application'
 
 
 DATABASES = {
