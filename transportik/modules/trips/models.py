@@ -42,3 +42,8 @@ class TripToProfile(models.Model):
     class Meta:
         db_table = 'trip_to_profile'
 
+    def __str__(self):
+        return 'TripToProfile(id = {0}, trip_id = {1}, profile_id = 2'.format(
+            self.id, self.trip.id, self.profile.id
+        )
+
