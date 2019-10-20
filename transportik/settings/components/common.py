@@ -30,7 +30,11 @@ INSTALLED_APPS: Tuple[str, ...] = (
 
     # DRF
     'rest_framework',
+    'rest_framework_gis',
     'django_filters',
+
+    # PostGIS
+    'django.contrib.gis'
 )
 
 MIDDLEWARE: Tuple[str, ...] = (

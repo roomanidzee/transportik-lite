@@ -136,6 +136,17 @@ version = "3.10.3"
 
 [[package]]
 category = "main"
+description = "Geographic add-ons for Django Rest Framework"
+name = "djangorestframework-gis"
+optional = false
+python-versions = "*"
+version = "0.14"
+
+[package.dependencies]
+djangorestframework = "*"
+
+[[package]]
+category = "main"
 description = "JSON Web Token based authentication for Django REST framework"
 name = "djangorestframework-jwt"
 optional = false
@@ -466,7 +477,7 @@ version = "0.6.0"
 more-itertools = "*"
 
 [metadata]
-content-hash = "7557aae9896b427a121167ed0fd74c1b3121ae794593b690d7d825adac467ca4"
+content-hash = "37e91cd9d27ad643bc63ea26a71419c20edce18970a74c5b23d3dce97a30083e"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -484,6 +495,7 @@ django = ["4025317ca01f75fc79250ff7262a06d8ba97cd4f82e93394b2a0a6a4a925caeb", "a
 django-filter = ["558c727bce3ffa89c4a7a0b13bc8976745d63e5fd576b3a9a851650ef11c401b", "c3deb57f0dd7ff94d7dce52a047516822013e2b441bed472b722a317658cfd14"]
 django-split-settings = ["db4d24a2da2f17e0aa97437f052eda7d043a3e2eaa9c8a85a171271e0f91852b", "f5a5c6431ab00a78959f7930a79faaf488b2fe8a4eddc4297ef8cd593e74868d"]
 djangorestframework = ["5488aed8f8df5ec1d70f04b2114abc52ae6729748a176c453313834a9ee179c8", "dc81cbf9775c6898a580f6f1f387c4777d12bd87abf0f5406018d32ccae71090"]
+djangorestframework-gis = ["35527c51e083ccc93f6e6d90a6515c132bbeb2c5648b166ac5b1a48c4ea8e2a4", "e645c6c8aedee53ac0a4851abcdf8121fff66813eebae1b040b1ccb941cb248b"]
 djangorestframework-jwt = ["5efe33032f3a4518a300dc51a51c92145ad95fb6f4b272e5aa24701db67936a7", "ab15dfbbe535eede8e2e53adaf52ef0cf018ee27dbfad10cbc4cbec2ab63d38c"]
 entrypoints = ["589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19", "c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"]
 gunicorn = ["aa8e0b40b4157b36a5df5e599f45c9c76d6af43845ba3b3b0efe2c70473c2471", "fa2662097c66f920f53f70621c6c58ca4a3c4d3434205e608e121b5b3b71f4f3"]

@@ -8,10 +8,22 @@ from transportik.modules.users.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    """
+    Entity for user model
+    """
 
-    email = models.EmailField(max_length=40, unique=True)
-    is_active = models.BooleanField(default=True)
-    created_date = models.DateTimeField(default=timezone.now)
+    email = models.EmailField(
+        max_length=40,
+        unique=True
+    )
+
+    is_active = models.BooleanField(
+        default=True
+    )
+
+    created_date = models.DateTimeField(
+        default=timezone.now
+    )
 
     objects = UserManager()
 
@@ -27,6 +39,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
+    """
+    Entity for profile model
+    """
 
     phone_regex = RegexValidator(
         regex=r'^((\+7|7|8)+([0-9]){10})$',
@@ -38,9 +53,18 @@ class Profile(models.Model):
         on_delete=models.CASCADE
     )
 
-    surname = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    patronymic = models.CharField(max_length=100)
+    surname = models.CharField(
+        max_length=100
+    )
+
+    name = models.CharField(
+        max_length=100
+    )
+
+    patronymic = models.CharField(
+        max_length=100
+    )
+
     phone = models.CharField(
         validators=[phone_regex],
         max_length=12,
