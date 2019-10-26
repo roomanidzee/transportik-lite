@@ -1,8 +1,22 @@
+from datetime import datetime
+from dataclasses import dataclass
+
 from django.contrib.gis.db import models
 from django.utils import timezone
 
 from transportik.modules.transports.enums import TransportType
 from transportik.modules.trips.models import Trip
+
+
+@dataclass
+class TransportAnalysis(object):
+    record_time: datetime
+    transport_id: int
+    is_busy: bool
+    is_repairing: bool
+    trip_id: int
+    distance: int
+    cost: int
 
 
 class TransportInfo(models.Model):

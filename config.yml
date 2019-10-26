@@ -16,3 +16,9 @@ jwt:
   verify_expiration: true
   expiration_time: 3000
   header: 'Bearer'
+
+cassandra:
+  contact_points: ['localhost']
+  port: 9042
+  keyspace: 'default'
+  table_name: 'transport_analysis'
