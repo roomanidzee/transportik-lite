@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = [
     path('api/v1/admin/doc/', include(admindocs_urls)),
     path('api/v1/admin/', admin.site.urls),
-    path('api/v1/server/', include('server.modules.urls')),
+    path('api/v1/transportik/', include('server.modules.urls')),
 ]
 
 

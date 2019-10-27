@@ -7,7 +7,6 @@ base_settings = [
     'components/caches.py',
     'components/common.py',
     'components/logging.py',
-    'components/cassandra.py',
     'environments/development.py'
 ]
 
