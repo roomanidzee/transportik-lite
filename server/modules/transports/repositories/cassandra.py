@@ -39,12 +39,8 @@ class CassandraAnalysisRepository(BaseAnalysisRepository):
 
     def save(self, model: TransportAnalysis):
         insert_query = self.session.prepare(
-            "INSERT INTO {keyspace}.{table_name}({fields}) VALUES({fields_count})".format(
-                keyspace=self.keyspace,
-                table_name=self.table_name,
-                fields=','.join(self.fields),
-                fields_count=['?' for _ in range(len(self.fields))]
-            )
+            "INSERT INTO default.transport_analysis(record_time, transport_id, is_busy, is_repairing, trip_id, distance, cost) "
+            "VALUES(?, ?, ?, ?, ?, ?, ?)"
         )
 
         self.session.execute(
