@@ -1,4 +1,5 @@
 from typing import Dict, List
+from datetime import datetime
 
 from cassandra.cluster import Cluster
 
@@ -39,7 +40,8 @@ class CassandraAnalysisRepository(BaseAnalysisRepository):
 
     def save(self, model: TransportAnalysis):
         insert_query = self.session.prepare(
-            "INSERT INTO default.transport_analysis(record_time, transport_id, is_busy, is_repairing, trip_id, distance, cost) "
+            "INSERT INTO "
+            "default.transport_analysis(record_time, transport_id, is_busy, is_repairing, trip_id, distance, cost) "
             "VALUES(?, ?, ?, ?, ?, ?, ?)"
         )
 
@@ -57,7 +59,34 @@ class CassandraAnalysisRepository(BaseAnalysisRepository):
         )
 
     def update(self, model: TransportAnalysis):
-        pass
 
-    def delete(self, identifier):
-        pass
+        update_query = self.session.prepare(
+            "UPDATE default.transport_analysis "
+            "SET record_time = ?, is_busy = ?, is_repairing = ?, trip_id = ?, distance = ?, cost = ?"
+            "WHERE transport_id = ?"
+        )
+
+        self.session.execute(
+            update_query,
+            [
+                model.record_time,
+                model.is_busy,
+                model.is_repairing,
+                model.trip_id,
+                model.distance,
+                model.cost,
+                model.transport_id
+            ]
+        )
+
+    def delete(self, identifier: datetime):
+
+        delete_query = self.session.prepare(
+            "DELETE FROM default.transport_analysis "
+            "WHERE record_time = blobAsBigint(timestampAsBlob(?))"
+        )
+
+        self.session.execute(
+            delete_query,
+            [identifier]
+        )
