@@ -8,4 +8,4 @@ from server.settings.components import BASE_DIR
 
 @pytest.fixture
 def test_settings():
-    return lya.AttrDict.from_yaml(str(BASE_DIR / Path('config-test.yml')))
+    return lya.AttrDict.from_yaml(str(BASE_DIR / Path('configs/config-test.yml')))
