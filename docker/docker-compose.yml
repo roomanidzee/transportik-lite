@@ -1,0 +1,29 @@
+version: '2.4'
+
+services:
+
+  db:
+    extends:
+      file: ./common/app-pg.yml
+      service: postgres
+
+    env_file:
+      - .env
+
+  app:
+
+    depends_on:
+      - db
+
+    extends:
+      file: ./common/app-pg.yml
+      service: app
+
+    env_file:
+      - .env
+
+networks:
+  webnet:
+
+volumes:
+  pg_data:

@@ -4,7 +4,7 @@ secret_key: 'asfdlnan3o49rj94jofewmcdsozixjp90womed,sa[0op'
 
 jdbc:
   name: 'transportik_db'
-  host: 'localhost'
+  host: 'postgres'
   port: 5432
   user: 'transportik_user'
   password: 'transportik_pass'

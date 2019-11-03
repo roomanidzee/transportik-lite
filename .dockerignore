@@ -1,0 +1,5 @@
+.pytest_cache
+htmlcov
+transportik_Env
+transportik_env
+.coverage

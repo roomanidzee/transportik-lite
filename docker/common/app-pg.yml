@@ -1,0 +1,40 @@
+version: '2.4'
+
+services:
+
+  postgres:
+
+    networks:
+      - webnet
+
+    image: 'timescale/timescaledb-postgis:1.4.2-pg11'
+    container_name: transportik_lite_postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+
+  app:
+
+    networks:
+      - webnet
+
+    build:
+
+      target: development_build
+      context: ../../
+      dockerfile: docker/django/Dockerfile
+
+    container_name: transportik_lite_app
+    volumes:
+      - ./:/code
+    ports:
+      - 8000:8000
+    command: start-dev
+
+networks:
+  webnet:
+
+volumes:
+  pg_data:
