@@ -8,7 +8,7 @@ services:
       - webnet
 
     image: 'timescale/timescaledb-postgis:1.4.2-pg11'
-    container_name: transportik_lite_postgres
+    container_name: tl_postgres
     ports:
       - 5432:5432
     volumes:
@@ -26,9 +26,9 @@ services:
       context: ../../
       dockerfile: docker/django/Dockerfile
 
-    container_name: transportik_lite_app
+    container_name: tl_app
     volumes:
-      - ./:/code
+      - ../../:/code
     ports:
       - 8000:8000
     command: start-dev

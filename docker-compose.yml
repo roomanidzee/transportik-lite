@@ -10,6 +10,30 @@ services:
     env_file:
       - .env
 
+  cassandra_node_1:
+    extends:
+      file: docker/common/cassandra.yml
+      service: cassandra
+
+    env_file:
+      - .env
+
+  cassandra_node_2:
+    extends:
+      file: docker/common/cassandra.yml
+      service: cassandra2
+
+    env_file:
+      - .env
+
+  cassandra_node_3:
+    extends:
+      file: docker/common/cassandra.yml
+      service: cassandra3
+
+    env_file:
+      - .env
+
   app:
 
     depends_on:
@@ -27,3 +51,9 @@ networks:
 
 volumes:
   pg_data:
+  cassandra_data:
+    driver: local
+  cassandra2_data:
+    driver: local
+  cassandra3_data:
+    driver: local

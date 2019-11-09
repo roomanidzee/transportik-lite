@@ -3,3 +3,5 @@ htmlcov
 transportik_Env
 transportik_env
 .coverage
+static
+docker

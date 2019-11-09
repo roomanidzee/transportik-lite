@@ -4,7 +4,7 @@ secret_key: 'asfdlnan3o49rj94jofewmcdsozixjp90womed,sa[0op'
 
 jdbc:
   name: 'transportik_db'
-  host: 'postgres'
+  host: 'tl_postgres'
   port: 5432
   user: 'transportik_user'
   password: 'transportik_pass'
@@ -18,7 +18,7 @@ jwt:
   header: 'Bearer'
 
 cassandra:
-  contact_points: ['localhost']
+  contact_points: ['tl_cassandra_1', 'tl_cassandra_2', 'tl_cassandra_3']
   port: 9042
   keyspace: 'default'
   table_name: 'transport_analysis'

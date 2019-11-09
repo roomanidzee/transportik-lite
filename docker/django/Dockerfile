@@ -16,7 +16,9 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
-RUN apt update && apt install -y --no-install-recommends gettext python3-dev libpq-dev netcat g++ gcc wget
+RUN apt update  \
+    && apt install -y --no-install-recommends gettext python3-dev libpq-dev netcat g++ gcc wget \
+                                              libgeos-dev binutils libproj-dev gdal-bin libgdal-dev python3-gdal
 
 RUN pip install poetry \
     && wget "https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64-v0.6.1.tar.gz" \

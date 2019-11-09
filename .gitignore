@@ -15,6 +15,7 @@
 *_env
 *_Env
 .env
+static
 
 # Generated files
 .idea/**/contentModel.xml
