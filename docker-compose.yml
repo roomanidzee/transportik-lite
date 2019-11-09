@@ -4,7 +4,7 @@ services:
 
   db:
     extends:
-      file: ./common/app-pg.yml
+      file: docker/common/app-pg.yml
       service: postgres
 
     env_file:
@@ -16,7 +16,7 @@ services:
       - db
 
     extends:
-      file: ./common/app-pg.yml
+      file: docker/common/app-pg.yml
       service: app
 
     env_file:
