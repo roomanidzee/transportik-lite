@@ -15,6 +15,7 @@ services:
 
     volumes:
       - cassandra_data:/bitnami
+      - ../cassandra/cql:/docker-entrypoint-initdb.d
 
   cassandra2:
 

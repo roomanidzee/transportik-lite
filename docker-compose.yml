@@ -52,8 +52,5 @@ networks:
 volumes:
   pg_data:
   cassandra_data:
-    driver: local
   cassandra2_data:
-    driver: local
   cassandra3_data:
-    driver: local
