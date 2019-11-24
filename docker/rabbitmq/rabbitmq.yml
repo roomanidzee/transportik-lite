@@ -9,24 +9,31 @@ services:
         environment:
             - RABBITMQ_ERLANG_COOKIE='rabbit-cluster'
 
+        volumes:
+            - ./root-init.sh:/usr/local/bin/root-init.sh
+
         container_name: rabbit-1
+        entrypoint: /usr/local/bin/root-init.sh
             
     rabbit-2:
         image: rabbitmq:3.8.1-management-alpine
         hostname: rabbit-2
         ports:
             - "15673:15672"
-        environment:
-            - RABBITMQ_ERLANG_COOKIE='rabbit-cluster'
 
-        container_name: rabbit-2    
+        volumes:
+            - ./cluster-connect.sh:/usr/local/bin/cluster-connect.sh
+
+        container_name: rabbit-2
+        entrypoint: /usr/local/bin/cluster-connect.sh
 
     rabbit-3:
         image: rabbitmq:3.8.1-management-alpine
         hostname: rabbit-3
         ports:
             - "15674:15672"
-        environment:
-            - RABBITMQ_ERLANG_COOKIE='rabbit-cluster'
+        volumes:
+            - ./cluster-connect.sh:/usr/local/bin/cluster-connect.sh
 
-        container_name: rabbit-3            
+        container_name: rabbit-3
+        entrypoint: /usr/local/bin/cluster-connect.sh

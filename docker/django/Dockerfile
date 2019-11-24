@@ -28,12 +28,9 @@ RUN pip install poetry \
 WORKDIR /pysetup
 COPY ./poetry.lock ./pyproject.toml /pysetup/
 
-COPY ./docker/django/entrypoint.sh /docker-entrypoint.sh
-
-RUN chmod +x "/docker-entrypoint.sh" \
-  && poetry config settings.virtualenvs.create false \
+RUN poetry config settings.virtualenvs.create false \
   && poetry install
 
 WORKDIR /code
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

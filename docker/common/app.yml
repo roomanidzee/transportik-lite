@@ -38,6 +38,7 @@ services:
     container_name: tl_app
     volumes:
       - ../../:/code
+      - ../../docker/django/entrypoint.sh:/usr/local/bin/entrypoint.sh
     ports:
       - 8000:8000
     command: start-dev

@@ -18,26 +18,32 @@ services:
     env_file:
       - .env
 
-  cassandra_node_1:
+  rabbit-1:
     extends:
-      file: docker/common/cassandra.yml
-      service: cassandra
+      file: docker/rabbitmq/rabbitmq.yml
+      service: rabbit-1
 
     env_file:
       - .env
 
-  cassandra_node_2:
+  rabbit-2:
     extends:
-      file: docker/common/cassandra.yml
-      service: cassandra2
+      file: docker/rabbitmq/rabbitmq.yml
+      service: rabbit-2
+
+    depends_on:
+      - rabbit-1
 
     env_file:
       - .env
 
-  cassandra_node_3:
+  rabbit-3:
     extends:
-      file: docker/common/cassandra.yml
-      service: cassandra3
+      file: docker/rabbitmq/rabbitmq.yml
+      service: rabbit-3
+
+    depends_on:
+      - rabbit-1
 
     env_file:
       - .env
@@ -71,6 +77,3 @@ networks:
 
 volumes:
   pg_data:
-  cassandra_data:
-  cassandra2_data:
-  cassandra3_data:

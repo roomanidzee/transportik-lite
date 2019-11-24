@@ -3,19 +3,20 @@
 from celery import Celery
 from celery.schedules import crontab
 
-from server.modules.transports.tasks import send_transports
+from server.modules.transports.tasks import (
+    send_transports_task,
+    retrieve_transports,
+)
 from server.settings.components import config
 
 redis_conf = config['redis']
+redis_url = f'redis://{redis_conf["host"]}: {redis_conf["port"]}/{redis_conf["db"]}'
 
 
 class Config:
-    broker_url = (f'redis://{redis_conf["host"]}'
-                  f':{redis_conf["port"]}/{redis_conf["db"]}')
-    result_backend = (f'redis://{redis_conf["host"]}'
-                      f':{redis_conf["port"]}/{redis_conf["db"]}')
-    broker_api = (f'redis://{redis_conf["host"]}'
-                  f':{redis_conf["port"]}/{redis_conf["db"]}')
+    broker_url = redis_url
+    result_backend = redis_url
+    broker_api = redis_url
     accept_content = ['pickle', 'json']
     task_track_started = True
     imports = [
@@ -29,7 +30,12 @@ app.config_from_object(Config)
 tasks_data = [
     (
         crontab(minute=2),
-        send_transports.s(),
+        send_transports_task.s(),
+        1
+    ),
+    (
+        crontab(minute=4),
+        retrieve_transports.s(),
         1
     )
 ]
