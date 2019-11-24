@@ -4,8 +4,16 @@ services:
 
   db:
     extends:
-      file: docker/common/app-pg.yml
+      file: docker/common/app.yml
       service: postgres
+
+    env_file:
+      - .env
+
+  cache:
+    extends:
+      file: docker/common/app.yml
+      service: redis
 
     env_file:
       - .env
@@ -40,8 +48,20 @@ services:
       - db
 
     extends:
-      file: docker/common/app-pg.yml
+      file: docker/common/app.yml
       service: app
+
+    env_file:
+      - .env
+
+  scheduler:
+
+    depends_on:
+      - app
+
+    extends:
+      file: docker/common/app.yml
+      service: celery
 
     env_file:
       - .env
