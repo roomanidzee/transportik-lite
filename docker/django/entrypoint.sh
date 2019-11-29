@@ -19,7 +19,5 @@ if [ "$1" = 'start-dev' ]; then
 elif [ "$1" = 'start-prod' ]; then
     sh /code/docker/django/gunicorn.sh
 elif [ "$1" = 'start-celery' ]; then
-    python manage.py makemigrations;
-    python manage.py migrate;
-    celery -E -A server.settings worker -B --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    celery -E -A server.settings worker -B --scheduler django_celery_beat.schedulers:DatabaseScheduler --loglevel=info
 fi

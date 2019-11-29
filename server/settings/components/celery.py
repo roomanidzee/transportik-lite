@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from celery import Celery
-from celery.schedules import crontab
-
-from server.modules.transports.tasks import (
-    send_transports_task,
-    retrieve_transports,
-)
 from server.settings.components import config
 
 redis_conf = config['redis']
@@ -27,26 +21,13 @@ class Config:
 app = Celery()
 app.config_from_object(Config)
 
-tasks_data = [
-    (
-        crontab(minute=2),
-        send_transports_task.s(),
-        1
-    ),
-    (
-        crontab(minute=4),
-        retrieve_transports.s(),
-        1
-    )
-]
-
-
-@app.on_after_configure.connect
-def setup_tasks(sender, **kwargs):
-    for elem in tasks_data:
-        sender.add_periodic_task(
-            elem[0],
-            elem[1],
-            expires=elem[2]
-        )
-
+app.conf.beat_schedule = {
+    'transports_producing': {
+        'task': 'server.modules.transports.tasks.send_transports_task',
+        'schedule': 10.0
+    },
+    'transports_consuming': {
+        'task': 'server.modules.transports.tasks.retrieve_transports',
+        'schedule': 20.0
+    }
+}

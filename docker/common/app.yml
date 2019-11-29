@@ -7,7 +7,7 @@ services:
     networks:
       - webnet
 
-    image: 'timescale/timescaledb-postgis:1.4.2-pg11'
+    image: 'kartoza/postgis:12.0'
     container_name: tl_postgres
     ports:
       - 5432:5432
@@ -29,6 +29,8 @@ services:
     networks:
       - webnet
 
+    image: 'romanidze/tl_app:latest'
+
     build:
 
       target: development_build
@@ -45,7 +47,7 @@ services:
 
   celery:
 
-    image: transportik-lite_app
+    image: 'romanidze/tl_app:latest'
 
     networks:
       - webnet
