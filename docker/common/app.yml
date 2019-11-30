@@ -7,7 +7,7 @@ services:
     networks:
       - webnet
 
-    image: 'kartoza/postgis:12.0'
+    image: 'timescale/timescaledb-postgis:1.4.2-pg11'
     container_name: tl_postgres
     ports:
       - 5432:5432
