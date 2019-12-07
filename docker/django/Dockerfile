@@ -21,9 +21,9 @@ RUN apt-get update  \
                                               libgeos-dev binutils libproj-dev gdal-bin libgdal-dev python3-gdal
 
 RUN pip install poetry \
-    && wget "https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64-v0.6.1.tar.gz" \
-    && tar -C /usr/local/bin -xzvf "dockerize-alpine-linux-amd64-v0.6.1.tar.gz" \
-    && rm "dockerize-alpine-linux-amd64-v0.6.1.tar.gz"
+    && wget "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
+    && tar -C /usr/local/bin -xzvf "dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" \
+    && rm "dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz"
 
 WORKDIR /pysetup
 COPY ./poetry.lock ./pyproject.toml /pysetup/
