@@ -10,6 +10,41 @@ services:
     env_file:
       - .env
 
+  zabbix-server:
+    extends:
+      file: docker/common/zabbix.yml
+      service: zabbix-server
+
+    env_file:
+      - .env
+
+    depends_on:
+      - db
+
+  zabbix-web:
+    extends:
+      file: docker/common/zabbix.yml
+      service: zabbix-web
+
+    env_file:
+      - .env
+
+    depends_on:
+      - db
+      - zabbix-server
+
+  zabbix-agent:
+    extends:
+      file: docker/common/zabbix.yml
+      service: zabbix-agent
+
+    env_file:
+      - .env
+
+    depends_on:
+      - db
+      - zabbix-server
+
   cache:
     extends:
       file: docker/common/app.yml
@@ -74,6 +109,3 @@ services:
 
 networks:
   webnet:
-
-volumes:
-  pg_data:

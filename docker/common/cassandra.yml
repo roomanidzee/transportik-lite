@@ -14,7 +14,6 @@ services:
       - 9042:9042
 
     volumes:
-      - cassandra_data:/bitnami
       - ../cassandra/cql:/docker-entrypoint-initdb.d
 
   cassandra2:
@@ -30,9 +29,6 @@ services:
       - 7001:7000
       - 9043:9042
 
-    volumes:
-      - cassandra2_data:/bitnami
-
   cassandra3:
 
     networks:
@@ -46,16 +42,5 @@ services:
       - 7002:7000
       - 9044:9042
 
-    volumes:
-      - cassandra3_data:/bitnami
-
 networks:
   webnet:
-
-volumes:
-  cassandra_data:
-    driver: local
-  cassandra2_data:
-    driver: local
-  cassandra3_data:
-    driver: local

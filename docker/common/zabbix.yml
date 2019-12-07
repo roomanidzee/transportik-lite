@@ -1,0 +1,42 @@
+version: '2.4'
+
+services:
+
+  zabbix-server:
+
+    networks:
+      - webnet
+
+    image: zabbix/zabbix-server-pgsql:alpine-4.4-latest
+    container_name: zabbix-server
+    ports:
+      - "10051:10051"
+
+  zabbix-web:
+
+    networks:
+      - webnet
+
+    image: zabbix/zabbix-web-nginx-pgsql:alpine-4.4-latest
+    container_name: zabbix-web
+    ports:
+      - 8090:80
+      - 8443:443 
+
+  zabbix-agent:
+
+    networks:
+      - webnet
+
+    image: zabbix/zabbix-agent:alpine-4.4-latest
+    privileged: true
+    container_name: zabbix-agent
+
+    environment:
+      - ZBX_SERVER_HOST=127.0.0.1 
+
+    ports:
+      - "10050:10050"
+
+networks:
+  webnet: 

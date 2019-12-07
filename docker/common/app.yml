@@ -11,8 +11,6 @@ services:
     container_name: tl_postgres
     ports:
       - 5432:5432
-    volumes:
-      - pg_data:/var/lib/postgresql/data
 
   redis:
 
@@ -59,6 +57,3 @@ services:
 
 networks:
   webnet:
-
-volumes:
-  pg_data:
