@@ -6,8 +6,8 @@ jdbc:
   name: 'transportik_db'
   host: 'tl_postgres'
   port: 5432
-  user: 'transportik_user'
-  password: 'transportik_pass'
+  user: 'zabbix'
+  password: 'zabbix'
   engine: 'django.contrib.gis.db.backends.postgis'
   conn_max_age: 60
 

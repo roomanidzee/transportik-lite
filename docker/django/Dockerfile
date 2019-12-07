@@ -1,4 +1,4 @@
-FROM python:3.7.5-slim-stretch as development_build
+FROM python:3.7.5-slim-buster as development_build
 
 LABEL maintainer = "Andrey Romanov"
 
@@ -16,8 +16,8 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
-RUN apt update  \
-    && apt install -y --no-install-recommends gettext python3-dev libpq-dev netcat g++ gcc wget \
+RUN apt-get update  \
+    && apt-get install -y --no-install-recommends gettext python3-dev libpq-dev netcat g++ gcc wget \
                                               libgeos-dev binutils libproj-dev gdal-bin libgdal-dev python3-gdal
 
 RUN pip install poetry \
