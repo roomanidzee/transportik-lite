@@ -11,7 +11,7 @@ class Config:
     broker_url = redis_url
     result_backend = redis_url
     broker_api = redis_url
-    accept_content = ['pickle', 'json']
+    accept_content = ['json']
     task_track_started = True
     imports = [
         "server.modules.transports.tasks"

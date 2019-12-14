@@ -30,6 +30,6 @@ redis:
 
 rabbitmq:
   host: 'rabbit-1'
-  port: 15672
-  user: 'tl_user'
-  password: 'tl_pass'
+  port: 5672
+  user: 'guest'
+  password: 'guest'

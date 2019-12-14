@@ -18,7 +18,6 @@ creds = pika.PlainCredentials(
 conn_parameters = pika.ConnectionParameters(
     host=rabbit_conf['host'],
     port=rabbit_conf['port'],
-    virtual_host='tl_vhost',
     credentials=creds
 )
 

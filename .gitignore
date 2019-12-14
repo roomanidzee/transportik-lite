@@ -15,6 +15,7 @@
 *_env
 *_Env
 .env
+venv
 static
 
 # Generated files

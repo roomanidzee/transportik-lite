@@ -38,6 +38,7 @@ services:
         DOCKERIZE_VERSION: ${DOCKERIZE_VERSION}
         POETRY_VERSION: ${POETRY_VERSION}
         DJANGO_ENV: ${DJANGO_ENV}
+        DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE}
 
     container_name: tl_app
     volumes:

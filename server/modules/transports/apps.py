@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class TransportsConfig(AppConfig):
-    name = 'transports'
+    name = 'server.modules.transports'
