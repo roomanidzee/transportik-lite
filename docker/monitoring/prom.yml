@@ -1,0 +1,45 @@
+version: '2.4'
+
+services:
+
+  exporter:
+
+    networks:
+      - webnet
+
+    image: 'kbudde/rabbitmq-exporter:latest'
+
+    ports:
+      - "9999:9090"
+
+    container_name: tl_rabbit_exporter
+
+  prometheus:
+
+    networks:
+      - webnet
+
+    image: 'prom/prometheus:v2.14.0'
+
+    ports:
+      - "9090:9090"
+
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+    container_name: tl_prometheus
+
+  grafana:
+
+    networks:
+      - webnet
+
+    image: 'grafana/grafana:6.5.2'
+
+    ports:
+      - "3000:3000"
+
+    container_name: tl_grafana
+
+networks:
+  webnet:

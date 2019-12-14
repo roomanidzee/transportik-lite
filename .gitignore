@@ -124,6 +124,7 @@ share/python-wheels/
 *.egg-info/
 *.egg
 MANIFEST
+**/migrations/**
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

@@ -30,7 +30,7 @@ COPY ./poetry.lock ./pyproject.toml /pysetup/
 
 COPY ./docker/django/entrypoint.sh /docker-entrypoint.sh
 
-RUN poetry config settings.virtualenvs.create false \
+RUN poetry config virtualenvs.create false \
   && poetry install
 
 WORKDIR /code
