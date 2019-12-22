@@ -34,7 +34,11 @@ INSTALLED_APPS: Tuple[str, ...] = (
     'django_filters',
 
     # PostGIS
-    'django.contrib.gis'
+    'django.contrib.gis',
+
+    # Celery
+    'celery',
+    'django_celery_beat',
 )
 
 MIDDLEWARE: Tuple[str, ...] = (
