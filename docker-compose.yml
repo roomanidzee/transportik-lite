@@ -1,0 +1,53 @@
+version: '2.4'
+
+services:
+
+    db:
+
+        networks:
+           - webnet
+
+        extends: 
+
+            file: backend/docker-compose.yml
+            service: postgres
+
+    cache:
+
+        networks:
+           - webnet
+
+        extends:
+
+            file: backend/docker-compose.yml
+            service: redis
+
+    app:
+
+        networks:
+           - webnet
+
+        extends:
+
+            file: backend/docker-compose.yml
+            service: app
+
+        depends_on:
+            - db
+            - cache
+
+    scheduler:
+
+        networks:
+           - webnet
+
+        extends:
+
+            file: backend/docker-compose.yml
+            service: celery
+
+        depends_on:
+            - app
+
+networks:
+  webnet:

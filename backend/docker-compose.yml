@@ -2,102 +2,75 @@ version: '2.4'
 
 services:
 
-  db:
-    extends:
-      file: docker/common/app.yml
-      service: postgres
+  postgres:
 
-    env_file:
-      - .env
+    networks:
+      - webnet
 
-  cache:
-    extends:
-      file: docker/common/app.yml
-      service: redis
+    image: 'timescale/timescaledb-postgis:1.4.2-pg11'
+    container_name: tl_postgres
+    ports:
+      - 5432:5432
 
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_DB=transportik_db
+      - POSTGRES_USER=transportik_user
+      - POSTGRES_PASSWORD=transportik_pass
+      - POSTGRES_HOST=tl_postgres
+      - POSTGRES_PORT=5432
 
-  rabbit-1:
-    extends:
-      file: docker/rabbitmq/rabbitmq.yml
-      service: rabbit-1
+  redis:
 
-    env_file:
-      - .env
+    networks:
+      - webnet
 
-  rabbit-2:
-    extends:
-      file: docker/rabbitmq/rabbitmq.yml
-      service: rabbit-2
+    image: 'redis:5.0.7-alpine'
+    container_name: tl_redis
+    ports:
+      - 6379:6379
 
-    depends_on:
-      - rabbit-1
-
-    env_file:
-      - .env
-
-  rabbit-3:
-    extends:
-      file: docker/rabbitmq/rabbitmq.yml
-      service: rabbit-3
-
-    depends_on:
-      - rabbit-1
-
-    env_file:
-      - .env
-
-  exporter:
-    extends:
-      file: docker/monitoring/prom.yml
-      service: exporter
-
-    depends_on:
-      - rabbit-1
-
-    env_file:
-      - .env
-
-  prometheus:
-    extends:
-      file: docker/monitoring/prom.yml
-      service: prometheus
-
-    depends_on:
-      - exporter
-
-  grafana:
-    extends:
-      file: docker/monitoring/prom.yml
-      service: grafana
-
-    depends_on:
-      - prometheus
+    environment:
+      - REDIS_PORT=6379
+      - REDIS_HOST=tl_redis
+      - REDIS_DB=0
 
   app:
 
-    depends_on:
-      - db
+    networks:
+      - webnet
 
-    extends:
-      file: docker/common/app.yml
-      service: app
+    image: 'romanidze/tl_app:latest'
 
-    env_file:
-      - .env
+    build:
 
-  scheduler:
+      target: development_build
+      context: system_service
+      dockerfile: docker/Dockerfile
+      args:
+        - DOCKERIZE_VERSION=v0.6.1
+        - POETRY_VERSION=1.0.2
+        - DJANGO_ENV=development
+        - DJANGO_SETTINGS_MODULE=server.settings
+        - PYSPARK_VERSION=2.4.4
 
-    depends_on:
-      - app
+    container_name: tl_app
+    volumes:
+      - ./system_service:/code
+    ports:
+      - 8000:8000
+    command: start-dev
 
-    extends:
-      file: docker/common/app.yml
-      service: celery
+  celery:
 
-    env_file:
-      - .env
+    image: 'romanidze/tl_app:latest'
+
+    networks:
+      - webnet
+
+    container_name: tl_celery
+    volumes:
+      - ./system_service:/code
+    command: start-celery
 
 networks:
   webnet:

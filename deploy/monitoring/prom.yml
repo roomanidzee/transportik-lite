@@ -1,0 +1,53 @@
+version: '2.4'
+
+services:
+
+  exporter:
+
+    networks:
+      - webnet
+
+    image: 'kbudde/rabbitmq-exporter:latest'
+
+    ports:
+      - "9999:9090"
+
+    environment:
+      - RABBIT_URL=http://rabbit-1:15672
+      - RABBIT_USER=guest
+      - RABBIT_PASSWORD=guest
+      - PUBLISH_PORT=9090
+      - OUTPUT_FORMAT=JSON
+      - LOG_LEVEL=debug
+
+    container_name: tl_rabbit_exporter
+
+  prometheus:
+
+    networks:
+      - webnet
+
+    image: 'prom/prometheus:v2.14.0'
+
+    ports:
+      - "9090:9090"
+
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+    container_name: tl_prometheus
+
+  grafana:
+
+    networks:
+      - webnet
+
+    image: 'grafana/grafana:6.5.2'
+
+    ports:
+      - "3000:3000"
+
+    container_name: tl_grafana
+
+networks:
+  webnet:

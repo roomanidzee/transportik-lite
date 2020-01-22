@@ -1,0 +1,61 @@
+version: '2.4'
+
+services:
+
+    rabbit-1:
+
+        networks:
+            - webnet
+
+        image: 'romanidze/tl_rabbit:latest'
+
+        build:
+          context: ../../
+          dockerfile: docker/rabbitmq/Dockerfile
+
+        hostname: tl_rabbit_1
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=rabbit-cluster
+
+        container_name: tl_rabbit_1
+        command: init
+            
+    rabbit-2:
+        networks:
+            - webnet
+
+        image: 'romanidze/tl_rabbit:latest'
+        hostname: tl_rabbit_2
+        ports:
+            - "15673:15672"
+            - "5673:5672"
+
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=rabbit-cluster
+
+        container_name: tl_rabbit_2
+        command: connect-cluster
+
+    rabbit-3:
+
+        networks:
+            - webnet
+
+        image: 'romanidze/tl_rabbit:latest'
+        hostname: tl_rabbit_3
+        ports:
+            - "15674:15672"
+            - "5674:5672"
+
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=rabbit-cluster
+
+        container_name: tl_rabbit_3
+        command: connect-cluster
+
+networks:
+  webnet:
